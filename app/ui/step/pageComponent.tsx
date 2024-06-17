@@ -22,7 +22,7 @@ class PageComponent extends StepComponent {
     };
 
     setDesc(option: string) {
-        this.props.updateDesc(`Set $page to ${option || '?'}`)
+        this.props.updateDesc(`Set $page as ${option || '?'}`)
     }
 
     onSelect = (option: string) => {
