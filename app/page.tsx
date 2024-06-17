@@ -9,10 +9,21 @@ import { PlusCircleOutlined, CloseOutlined } from '@ant-design/icons';
 const { Header, Content } = Layout;
 
 import { lusitana } from '@/app/ui/fonts';
+import Image from 'next/image';
+import CypressLogo from '@/public/cypress.svg';
 
 import Case from '@/app/ui/case/case';
+import { heartbeat } from '@/app/lib/mock-server';
 
 export default function Home() {
+
+  const [mockServerAlive, mockServerAliveUpdate] = useState(false);
+
+  const alive = async () => {
+    const $ = async () => mockServerAliveUpdate(await heartbeat());
+    await $();
+    setInterval($, 10000);
+  }
 
   const [testCaseIdList, testCaseIdListUpdate]: [string[], any] = useState([]);
 
@@ -100,6 +111,7 @@ export default function Home() {
               selectedKeys={[activeTestCaseId]}
               style={{ flex: 1, background: 'rgb(0, 0, 0)' }}
             />
+            <Image src={CypressLogo} alt='Cypress' width={35} priority={true} onLoad={alive} style={{ filter: mockServerAlive ? 'grayscale(0%)' : 'grayscale(100%)' }} />
           </Header>
           <Content
             style={{

@@ -5,6 +5,7 @@ const mock_server = 'http://localhost:3000';
 const url = (uri: string) => new URL(uri, mock_server)
 
 const uris = {
+    heartbeat: '/heartbeat',
     build: '/cypress/build',
     sync: '/cypress/sync',
     page: '/cypress/page',
@@ -13,6 +14,16 @@ const uris = {
     caseList: '/cypress/caseList',
     case: '/cypress/case',
     save: '/cypress/case/save'
+}
+
+export async function heartbeat() {
+    try {
+        const req = url(uris.heartbeat);
+        const resp = await fetch(req);
+        return resp.ok;
+    } catch (error) {
+        return false;
+    }
 }
 
 export async function build(name: string) {

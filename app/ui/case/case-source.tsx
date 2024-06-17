@@ -30,10 +30,6 @@ class CaseSource extends Component<CaseSourceProps> {
         super(props);
     }
 
-    async componentDidMount() {
-        await this.onSourceChange(this.state.source);
-    }
-
     onSourceChange = async (option: string) => {
         let state: CaseSourceState = {
             source: option,
@@ -52,6 +48,10 @@ class CaseSource extends Component<CaseSourceProps> {
                 break;
         }
         this.setState(state)
+    }
+
+    setOptions = async () => {
+        if (this.state.options.length === 0) await this.onSourceChange(this.state.source);
     }
 
     onNameChange = (text: string) => {
@@ -82,6 +82,7 @@ class CaseSource extends Component<CaseSourceProps> {
                     filterOption={(input: string, option?: { label: string; value: string }) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
                     style={{ width: 440, marginTop: 25, marginBottom: 15 }}
                     options={this.state.options.map(option => ({ label: option, value: option }))}
+                    onFocus={this.setOptions}
                     onChange={this.onNameChange}
                     value={this.state.name}
                     status={this.state.nameStatus}
