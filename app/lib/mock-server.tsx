@@ -1,4 +1,4 @@
-'use server';
+'use client';
 
 const mock_server = 'http://localhost:3000';
 
