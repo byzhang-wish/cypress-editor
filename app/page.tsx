@@ -92,10 +92,13 @@ export default function Home() {
 
   useEffect(() => {
     onAddTestCase();
+    const handleBeforeUnload = (event: any) => event.preventDefault();
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
   }, [onAddTestCase]);
 
   return (
-    <main className="flex flex-col min-h-screen ">
+    <main className="flex flex-col min-h-screen">
       <ConfigProvider
         theme={{
           token: {

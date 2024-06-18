@@ -164,6 +164,31 @@ class Case extends Component<CaseProps> {
 
     onClickCollapse = () => this.setState({ collapse: !this.state.collapse })
 
+    handleKeyDown = async (event: any) => {
+        if (event.ctrlKey || event.metaKey) {
+            switch (event.key) {
+                case 's':
+                    event.preventDefault();
+                    await this.onClickSave();
+                    break;
+                case 'b':
+                    event.preventDefault();
+                    await this.onClickBuild();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    componentDidMount() {
+        window.addEventListener('keydown', this.handleKeyDown);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('keydown', this.handleKeyDown);
+    }
+
     render() {
         return (
             <>
