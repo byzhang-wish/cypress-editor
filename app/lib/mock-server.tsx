@@ -131,7 +131,6 @@ export async function sync() {
 
 export async function save(source: string, name: string, content: string) {
     try {
-        if (source !== 'Local') throw `Not supported yet`
         if (!name.trim()) throw 'Null name'
         const req = url(uris.save);
         req.searchParams.append('source', source);
