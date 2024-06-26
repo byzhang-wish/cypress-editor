@@ -8,16 +8,21 @@ image:
 service:
   type: ClusterIP
   port: 80
+  targetPort: 8080
 
 ingress:
   enabled: true
   className: ""
   annotations: {}
   hosts:
-    - host: cypress.k8dev.bjs.i.wish.com
+    - host: cypress.k8qa.bjs.i.wish.com
       paths:
         - path: /
           pathType: ImplementationSpecific
   tls: []
 
 resources: {}
+
+serviceAccount: {}
+
+autoscaling: {}
