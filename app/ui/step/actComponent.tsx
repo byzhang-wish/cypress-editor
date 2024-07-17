@@ -15,7 +15,8 @@ interface ActState {
     value: ActStep,
     options: string[],
     data: string[],
-    context: string
+    context: string,
+    smallYAMLEditor: boolean
 }
 
 class ActComponent extends StepComponent {
@@ -28,7 +29,8 @@ class ActComponent extends StepComponent {
         },
         options: [],
         data: [],
-        context: ''
+        context: '',
+        smallYAMLEditor: true
     };
 
     onActFocus = async () => {
@@ -111,8 +113,8 @@ class ActComponent extends StepComponent {
             <CommonSelect options={this.state.options} onSelect={this.onActSelect} onFocus={this.onActFocus} onSearch={() => { }} defaultValue={this.state.value.Act} />
             <Input style={{ width: 88, marginRight: 2 }} value="Desc" readOnly />
             <Input style={{ width: 410 }} onChange={($event) => { this.onDescChange($event.target.value) }} defaultValue={this.state.value.Desc} />
-            <Card style={{ width: 500, height: 80, marginTop: '2px' }}>
-                <YAMLEditor data={this.state.data} context={this.state.context} setContext={this.setContext} onFocus={this.onArgsFocus} />
+            <Card style={{ width: 500, height: this.state.smallYAMLEditor ? 80 : 285, marginTop: '2px' }} onDoubleClick={() => { this.setState({ smallYAMLEditor: !this.state.smallYAMLEditor }) }}>
+                <YAMLEditor data={this.state.data} context={this.state.context} setContext={this.setContext} onFocus={this.onArgsFocus} smallYAMLEditor={this.state.smallYAMLEditor} />
             </Card>
         </>);
     }

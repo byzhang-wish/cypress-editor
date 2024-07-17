@@ -13,7 +13,8 @@ interface YAMLEditorProps {
     data: string[],
     context: string;
     setContext: (context: string) => void,
-    onFocus: () => void
+    onFocus: () => void,
+    smallYAMLEditor: boolean
 }
 
 export default class YAMLEditor extends Component<YAMLEditorProps> {
@@ -63,7 +64,7 @@ export default class YAMLEditor extends Component<YAMLEditorProps> {
                 name="yaml-editor"
                 placeholder='Arguments'
                 width='450px'
-                height='50px'
+                height={this.props.smallYAMLEditor ? '50px' : '255px'}
                 fontSize='14px'
                 showGutter={false}
                 highlightActiveLine={false}
